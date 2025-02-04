@@ -37,9 +37,8 @@ public class Binary
 	
 		// If all digits are '0', ensure number is "0"
 		this.number = (beg == number.length()) ? "0" : number.substring(beg);
-	
-		// Ensure empty strings are replaced with "0"
-		if (this.number.isEmpty()) {
+
+		if (this.number.isEmpty()) { // replace empty strings with a single zero
 			this.number = "0";
 		}
 	}
@@ -84,6 +83,68 @@ public class Binary
 		}
 		Binary result=new Binary(num3);  // create a binary object with the calculated value.
 		return result;
-		
 	}
-}	
+
+	/**
+	 * Perform bitwise OR operation on two binary variables.
+	 * @param num1 The first binary operand.
+	 * @param num2 The second binary operand.
+	 * @return A binary variable with the result of the OR operation.
+	 */
+	public static Binary or(Binary num1, Binary num2) {
+		StringBuilder result = new StringBuilder();
+		int len1 = num1.number.length();
+		int len2 = num2.number.length();
+		int maxLen = Math.max(len1, len2);
+
+		for (int i = 0; i < maxLen; i++) {
+			char bit1 = (i < len1) ? num1.number.charAt(len1 - 1 - i) : '0';
+			char bit2 = (i < len2) ? num2.number.charAt(len2 - 1 - i) : '0';
+			result.insert(0, (bit1 == '1' || bit2 == '1') ? '1' : '0');
+		}
+
+		return new Binary(result.toString());
+	}
+
+	/**
+	 * Perform bitwise AND operation on two binary variables.
+	 * @param num1 The first binary operand.
+	 * @param num2 The second binary operand.
+	 * @return A binary variable with the result of the AND operation.
+	 */
+	public static Binary and(Binary num1, Binary num2) {
+		StringBuilder result = new StringBuilder();
+		int len1 = num1.number.length();
+		int len2 = num2.number.length();
+		int maxLen = Math.max(len1, len2);
+
+		for (int i = 0; i < maxLen; i++) {
+			char bit1 = (i < len1) ? num1.number.charAt(len1 - 1 - i) : '0';
+			char bit2 = (i < len2) ? num2.number.charAt(len2 - 1 - i) : '0';
+			result.insert(0, (bit1 == '1' && bit2 == '1') ? '1' : '0');
+		}
+
+		return new Binary(result.toString());
+	}
+
+	/**
+	 * Multiply two binary variables using repeated addition.
+	 * @param num1 The first binary operand.
+	 * @param num2 The second binary operand.
+	 * @return A binary variable with the product of num1 and num2.
+	 */
+	public static Binary multiply(Binary num1, Binary num2) {
+		Binary result = new Binary("0");
+		Binary multiplier = new Binary(num2.number);
+		String multiplicand = num1.number;
+
+		for (int i = multiplicand.length() - 1; i >= 0; i--) {
+			if (multiplicand.charAt(i) == '1') {
+				result = Binary.add(result, multiplier);
+			}
+			multiplier = new Binary(multiplier.number + "0"); // Shift multiplier left
+		}
+
+		return result;
+	}
+}

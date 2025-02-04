@@ -1,4 +1,4 @@
-package com.ontariotechu.sofe3980u;
+package com.ontariotechu.sofe3980U;
 
 //import com.ontariotechu.sofe3980U.HelloController;
 import org.springframework.beans.factory.annotation.Autowired;

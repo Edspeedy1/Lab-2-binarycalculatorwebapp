@@ -1,4 +1,4 @@
-package com.ontariotechu.sofe3980u;
+package com.ontariotechu.sofe3980U;
 
 public class APIResult {
 	private String name;

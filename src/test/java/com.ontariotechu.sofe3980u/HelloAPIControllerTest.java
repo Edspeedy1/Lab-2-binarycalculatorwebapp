@@ -1,4 +1,4 @@
-package com.ontariotechu.sofe3980u;
+package com.ontariotechu.sofe3980U;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
